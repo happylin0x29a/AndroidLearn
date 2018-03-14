@@ -72,7 +72,7 @@ public class LineView extends View {
         dashPaint.setColor(Color.BLACK);
         textPaint.setStyle(Paint.Style.STROKE);
         textPaint.setTextSize(textSize);
-        textPaint.setStrokeWidth(2.5f);
+        textPaint.setStrokeWidth(2.0f);
     }
     //绘制XY轴
     private void drawXY(Canvas canvas){
@@ -127,7 +127,6 @@ public class LineView extends View {
         linePaint.setColor(color);
         float xDesc=originX+xLength+originX*0.6f;
         float yDesc=(originY-yLength)*(1.0f/(float)dataMap.size());
-        Log.i("yDesc",""+originY+","+yLength+","+1/dataMap.size());
         canvas.drawLine(originX+xLength,yDesc*index,xDesc,yDesc*index,linePaint);
         canvas.drawText(dataType,xDesc+textSize*0.1f,yDesc*index,textPaint);
         canvas.drawPath(path,linePaint);
