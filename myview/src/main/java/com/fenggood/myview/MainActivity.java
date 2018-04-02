@@ -3,6 +3,7 @@ package com.fenggood.myview;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Description;
@@ -17,16 +18,34 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements OnChartValueSelectedListener {
     private LineChart mChart;
     private ArrayList<Entry> mValues;
+    private CurveView curveView;
+    private DashBoardView dashBoardView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mChart=findViewById(R.id.view_lineChart);
-        setLineChart();
+        dashBoardView=findViewById(R.id.dbv_data);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dashBoardView.setCurrentValue((float) (50-Math.random()*100));
+                    }
+                });
+            }
+        },new Date(),3000);
+
+//        mChart=findViewById(R.id.view_lineChart);
+//        setLineChart();
 //        setCurveView();
 //        setLineView();
 //        setPieChartView();
@@ -79,9 +98,9 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
 //        float[] data5 = {16, 45, 75, 73, 61, 92, 28};
 //        curveView.addLine("林峰1", data, Color.RED);
 //        curveView.addLine("林峰2", data1, Color.BLUE);
-////        curveView.addLine("林峰3", data3, Color.GRAY);
-////        curveView.addLine("林峰4",data4, Color.DKGRAY);
-////        curveView.addLine("林峰5", data5, Color.YELLOW);
+//        curveView.addLine("林峰3", data3, Color.GRAY);
+//        curveView.addLine("林峰4",data4, Color.DKGRAY);
+//        curveView.addLine("林峰5", data5, Color.YELLOW);
 //    }
     private void setLineChart(){
         //此属性设置之后,点击图标中的某个点网格会自动将此点移动到屏幕中心 不设置则没反应
@@ -111,12 +130,12 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
         //图表背景颜色的设置
         mChart.setBackgroundColor(Color.LTGRAY);
         //图表进入的动画时间 从左到右
-        mChart.animateX(2500);
+        mChart.animateX(1000);
         //描述信息
 //        Description description = new Description();
 //        description.setText("描述信息相关内容");
 //        //设置描述信息
-        mChart.setDescription(null);
+//        mChart.setDescription(null);
         //设置没有数据时显示的文本
         mChart.setNoDataText("没有数据 啊啊啊");
         XAxis xAxis=mChart.getXAxis();
@@ -196,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements OnChartValueSelec
     }
     @Override
     public void onValueSelected(Entry e, Highlight h) {
-
+        Toast.makeText(MainActivity.this,e.getY()+"",Toast.LENGTH_SHORT).show();
     }
 
     @Override

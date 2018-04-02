@@ -1,81 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.fenggood.myview.MainActivity">
-    <!--<com.fenggood.myview.MyView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--&gt;-->
-    <!--</com.fenggood.myview.MyView>-->
-    <!--<com.fenggood.myview.PieChartView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/view_pie"-->
-        <!--/>-->
-    <!--<com.fenggood.myview.LineView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/view_line"/>-->
-    <!--<com.fenggood.myview.CanvasControlView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
-    <!--<com.fenggood.myview.CheckView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="300dp"-->
-        <!--android:id="@+id/view_check"/>-->
-    <!--<CheckBox-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/ck_ck"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/view_check"/>-->
-    <!--<com.fenggood.myview.DrawTextView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
-    <!--<com.fenggood.myview.PathView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
-    <!--<com.fenggood.myview.SpiderRadarView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
-    <!--<com.fenggood.myview.BezierView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
-    <!--<com.fenggood.myview.BezierView2-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="400dp"-->
-        <!--android:id="@+id/view_b2"/>-->
-    <!--<CheckBox-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/view_b2"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--android:text="移动控制点一"-->
-        <!--android:id="@+id/ck_1"/>-->
-    <!--<CheckBox-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/view_b2"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--android:text="移动控制点二"-->
-        <!--android:id="@+id/ck_2"/>-->
-    <!--<com.fenggood.myview.BezierView3-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
-    <!--<com.fenggood.myview.HistogramView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content" />-->
-    <!--<com.fenggood.myview.ArrowView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent" />-->
-    <!--<com.fenggood.myview.CurveView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:id="@+id/view_cure"/>-->
-    <com.github.mikephil.charting.charts.LineChart
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/view_lineChart"/>
+<com.fenggood.myview.DashBoardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/dbv_data"/>
 </android.support.constraint.ConstraintLayout>

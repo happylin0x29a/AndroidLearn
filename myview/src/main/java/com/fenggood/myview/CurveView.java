@@ -61,7 +61,7 @@ public class CurveView extends View {
         curvePaint.setStrokeWidth(3f);
         curvePaint.setDither(true);
         curvePaint.setAntiAlias(true);
-        PathEffect pathEffect=new CornerPathEffect(25);
+        PathEffect pathEffect=new CornerPathEffect(100);
         curvePaint.setPathEffect(pathEffect);
         solidPaint.setStyle(Paint.Style.STROKE);
         solidPaint.setStrokeWidth(2f);
