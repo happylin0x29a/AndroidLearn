@@ -19,7 +19,7 @@ import java.text.DecimalFormat;
  */
 
 public class DashBoardView extends View {
-    private static final String TAG=DashBoardView.class.getSimpleName();
+    private static final String TAG = DashBoardView.class.getSimpleName();
 
     private float width, height;//父布局高度和宽度
 
@@ -44,33 +44,33 @@ public class DashBoardView extends View {
     private float shortScale = 0.95f;//绘制短线的弧半径占最外层弧半径的比例
     private float innerScale = 0.80f;//最内层弧半径占最外层弧半径的比例 影响弧的宽度 半径越大弧的宽度越小
     private float scaleValueScale = 0.67f;//刻度值弧占最外层弧半径的比例
-    private float pointerScale=0.1f;//指针弧占最外层弧半径的比例
-    private float legendScale=0.46f;//图例占占父布局宽度（或者是高度）的比例
+    private float pointerScale = 0.1f;//指针弧占最外层弧半径的比例
+    private float legendScale = 0.46f;//图例占占父布局宽度（或者是高度）的比例
     private float arcWidth;//弧的宽度
 
     private float scaleValueCount = 50;//刻度的数量
     private float startscaleValue = -50;//开始刻度值
     private float endscaleValue = 50;//停止刻度值
-    private float scaleValueCountBig=10;//大刻度值的数量 分成多少段
-    private float scaleValueSweep=scaleValueCount/scaleValueCountBig;//隔多少个刻度画一个长线
+    private float scaleValueCountBig = 10;//大刻度值的数量 分成多少段
+    private float scaleValueSweep = scaleValueCount / scaleValueCountBig;//隔多少个刻度画一个长线
 
 
     private Paint arcPaint;//弧的画笔
     private Paint shortLinePaint;//短线的画笔
     private Paint pointerPaint;//指针的画笔
     private Paint currentValuePaint;//值的画笔
-    private float currentValueWidth=6f;//值的宽度
-    private float currentValueSize=60f;
-    private float pointerWidth=15f;//指针的线的宽度
+    private float currentValueWidth = 6f;//值的宽度
+    private float currentValueSize = 60f;
+    private float pointerWidth = 15f;//指针的线的宽度
     private float shortLineWidth = 6f;//短线的宽度
     private Paint scaleValuePaint;//刻度值的画笔
     private float scaleValueWidth = 3f;//刻度值的宽度
     private float scaleValueSize = 35f;//刻度值的宽度
     private Paint legendValuePaint;
-    private float legendNameValueWidth=40f;//图例名称字体大小
+    private float legendNameValueWidth = 40f;//图例名称字体大小
 
 
-    private float pointAngle=30;//指针偏移的角度
+    private float pointAngle = 30;//指针偏移的角度
 
     //弧分成三段颜色的颜色值
     private int[] arcColors = {Color.parseColor("#91C7AE"), Color.parseColor("#63869E"),
@@ -79,15 +79,16 @@ public class DashBoardView extends View {
     //弧分成三段所占的比例
     private float[] arcScales = {0.2f, 0.6f, 0.2f};//三个数的和必须是1
 
-    private float[][] scaleValue=new float[arcScales.length][2];//每个颜色范围的 起始值
+    private float[][] scaleValue = new float[arcScales.length][2];//每个颜色范围的 起始值
 
     private int startAngle;//开始的角度
     private int sweepAngle;//扫过的角度
     private int shortageAngle = 80;//缺失的部分的角度
 
-    private float currentValue=10;
+    private float currentValue = 10;
 
-    private String legendName="温度(℃)";
+    private String legendName = "温度(℃)";
+
 
     public DashBoardView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -114,9 +115,9 @@ public class DashBoardView extends View {
         shortLineR = outR * shortScale;
         innerR = outR * innerScale;
         scaleValueR = outR * scaleValueScale;
-        pointerR=outR*pointerScale;
-        legendHigh=Math.min(w, h)*legendScale;
-        legendWidth=outR*(1-legendScale*2);
+        pointerR = outR * pointerScale;
+        legendHigh = Math.min(w, h) * legendScale;
+        legendWidth = outR * (1 - legendScale * 2);
         arcWidth = outR * (1 - innerScale); //弧的宽度等于最外层弧的半径减去最内存弧的半径
         arcR = innerR + arcWidth / 2;  //弧的半径等于弧的宽度除以2加上最内弧的半径
         intPaint();
@@ -141,17 +142,17 @@ public class DashBoardView extends View {
         scaleValuePaint.setTextSize(scaleValueSize);
         scaleValuePaint.setTextAlign(Paint.Align.CENTER);
         scaleValuePaint.setAntiAlias(true);
-        pointerPaint=new Paint();
+        pointerPaint = new Paint();
         pointerPaint.setStyle(Paint.Style.FILL);
         pointerPaint.setStrokeWidth(pointerWidth);
         pointerPaint.setAntiAlias(true);
-        currentValuePaint=new Paint();
+        currentValuePaint = new Paint();
         currentValuePaint.setStyle(Paint.Style.STROKE);
         currentValuePaint.setStrokeWidth(currentValueWidth);
         currentValuePaint.setTextSize(currentValueSize);
         currentValuePaint.setTextAlign(Paint.Align.CENTER);
         currentValuePaint.setAntiAlias(true);
-        legendValuePaint=new Paint();
+        legendValuePaint = new Paint();
         legendValuePaint.setAntiAlias(true);
         legendValuePaint.setTextAlign(Paint.Align.CENTER);
         legendValuePaint.setStrokeWidth(2f);
@@ -165,10 +166,10 @@ public class DashBoardView extends View {
         shortLinePath = consPath(shortLineR);
         innerPath = consPath(innerR);
         scaleValuePath = consPath(scaleValueR);
-        pointerPath=new Path();
-        pointerPath.addArc(getArcRecf(pointerR),startAngle,sweepAngle);
-        pointerLongPath=new Path();
-        pointerLongPath.addArc(getArcRecf(pointerR),startAngle-pointAngle,sweepAngle+2*pointAngle);//因为有可能指针指到边界
+        pointerPath = new Path();
+        pointerPath.addArc(getArcRecf(pointerR), startAngle, sweepAngle);
+        pointerLongPath = new Path();
+        pointerLongPath.addArc(getArcRecf(pointerR), startAngle - pointAngle, sweepAngle + 2 * pointAngle);//因为有可能指针指到边界
     }
 
     //绘制看的见的弧
@@ -202,7 +203,7 @@ public class DashBoardView extends View {
                 shortLineMeasure.getPosTan(shortLineLength / scaleValueCount * i, shortLinePosition, null);
                 shortPath.moveTo(outPosition[0], outPosition[1]);
                 shortPath.lineTo(shortLinePosition[0], shortLinePosition[1]);
-            } else if (i % scaleValueSweep == 0&&i!=0) {
+            } else if (i % scaleValueSweep == 0 && i != 0) {
                 float[] innerLinePosition = new float[2];//最内弧的点的位置
                 outMeasure.getPosTan(outLength / scaleValueCount * i, outPosition, null);
                 innerMeasure.getPosTan(innerLineLength / scaleValueCount * i, innerLinePosition, null);
@@ -225,56 +226,56 @@ public class DashBoardView extends View {
                 float scale = i / scaleValueCount;
                 float distance = scaleValueLength * scale;
                 scaleValueMeasure.getPosTan(distance, scaleValuePosition, null);
-                float value = (( endscaleValue-startscaleValue) * scale)+startscaleValue;
+                float value = ((endscaleValue - startscaleValue) * scale) + startscaleValue;
                 //根据比例给不同范围的刻度值设置颜色
                 if (scale <= arcScales[0]) {
                     scaleValueColor = arcColors[0];
-                } else if (scale > arcScales[0] && scale <= arcScales[1]+arcScales[0]) {
+                } else if (scale > arcScales[0] && scale <= arcScales[1] + arcScales[0]) {
                     scaleValueColor = arcColors[1];
-                } else if (scale > arcScales[1]+arcScales[0] && scale <= arcScales[2]+arcScales[1]+arcScales[0]) {
+                } else if (scale > arcScales[1] + arcScales[0] && scale <= arcScales[2] + arcScales[1] + arcScales[0]) {
                     scaleValueColor = arcColors[2];
                 }
                 scaleValuePaint.setColor(scaleValueColor);
-                canvas.drawText( new DecimalFormat("#.##").format(value) + "", scaleValuePosition[0], scaleValuePosition[1], scaleValuePaint);
+                canvas.drawText(new DecimalFormat("#.##").format(value) + "", scaleValuePosition[0], scaleValuePosition[1], scaleValuePaint);
             }
         }
     }
 
 
     //绘制指针
-    private void drawPointer(Canvas canvas){
-        float[] scaleValuePosition=getValuePosition(scaleValuePath,currentValue,false,0);//刻度值上的点
-        float offScale=pointAngle/sweepAngle;//偏移角度占总角度的比例
-        float[] upPosition=getValuePosition(pointerPath,currentValue,true,offScale);//靠右点的位置
-        float[] downPosition=getValuePosition(pointerPath,currentValue,true,-offScale);//靠左点的位置
-        Log.i(TAG,"scaleValuePosition:["+scaleValuePosition[0]+","+scaleValuePosition[1]+"]");
-        Log.i(TAG,"upPosition:["+upPosition[0]+","+upPosition[1]+"]");
-        Log.i(TAG,"downPosition:["+downPosition[0]+","+downPosition[1]+"]");
-        Path pointPath=new Path();
-        pointPath.lineTo(upPosition[0],upPosition[1]);
-        pointPath.lineTo(scaleValuePosition[0],scaleValuePosition[1]);
-        pointPath.lineTo(downPosition[0],downPosition[1]);
+    private void drawPointer(Canvas canvas) {
+        float[] scaleValuePosition = getValuePosition(scaleValuePath, currentValue, false, 0);//刻度值上的点
+        float offScale = pointAngle / sweepAngle;//偏移角度占总角度的比例
+        float[] upPosition = getValuePosition(pointerPath, currentValue, true, offScale);//靠右点的位置
+        float[] downPosition = getValuePosition(pointerPath, currentValue, true, -offScale);//靠左点的位置
+        Log.i(TAG, "scaleValuePosition:[" + scaleValuePosition[0] + "," + scaleValuePosition[1] + "]");
+        Log.i(TAG, "upPosition:[" + upPosition[0] + "," + upPosition[1] + "]");
+        Log.i(TAG, "downPosition:[" + downPosition[0] + "," + downPosition[1] + "]");
+        Path pointPath = new Path();
+        pointPath.lineTo(upPosition[0], upPosition[1]);
+        pointPath.lineTo(scaleValuePosition[0], scaleValuePosition[1]);
+        pointPath.lineTo(downPosition[0], downPosition[1]);
         pointPath.close();
-        int color=getValueColor(currentValue);
+        int color = getValueColor(currentValue);
         pointerPaint.setColor(color);
 //        canvas.drawPoint(upPosition[0],upPosition[1],pointerPaint);
 //        canvas.drawPoint(downPosition[0],downPosition[1],pointerPaint);
-        canvas.drawPath(pointPath,pointerPaint);//FILL 要转弯
+        canvas.drawPath(pointPath, pointerPaint);//FILL 要转弯
     }
 
 
     //绘制值
-    private void drawCurrentValue(Canvas canvas){
+    private void drawCurrentValue(Canvas canvas) {
         currentValuePaint.setColor(getValueColor(currentValue));
-        canvas.drawText(currentValue+"",0,scaleValueR,currentValuePaint);
+        canvas.drawText(currentValue + "", 0, scaleValueR, currentValuePaint);
     }
 
 
     //绘制图例
-    private void drawLegend(Canvas canvas){
-        RectF rectF=new RectF(-legendWidth,-legendHigh,0,-legendHigh+legendWidth);
+    private void drawLegend(Canvas canvas) {
+        RectF rectF = new RectF(-legendWidth, -legendHigh, 0, -legendHigh + legendWidth);
         legendValuePaint.setColor(getValueColor(currentValue));
-        canvas.drawText(legendName,0,-legendHigh+legendWidth,legendValuePaint);
+        canvas.drawText(legendName, 0, -legendHigh + legendWidth, legendValuePaint);
     }
 
     //根据半径获取矩形
@@ -297,47 +298,49 @@ public class DashBoardView extends View {
         return path;
     }
 
-//计算每个刻度范围 起始值
-    private void calcScaleValue(){
-        float lastValue=0f;
-        for (int i=0;i<scaleValue.length;i++){
-            float startValue=i==0?startscaleValue:lastValue;
-            float endValue = (( endscaleValue-startscaleValue) * arcScales[i])+startValue;
-            scaleValue[i][0]=startValue;
-            scaleValue[i][1]=endValue;
-            lastValue=endValue;
+    //计算每个刻度范围 起始值
+    private void calcScaleValue() {
+        float lastValue = 0f;
+        for (int i = 0; i < scaleValue.length; i++) {
+            float startValue = i == 0 ? startscaleValue : lastValue;
+            float endValue = ((endscaleValue - startscaleValue) * arcScales[i]) + startValue;
+            scaleValue[i][0] = startValue;
+            scaleValue[i][1] = endValue;
+            lastValue = endValue;
         }
     }
+
     //获取当前值是什么颜色
-    private int getValueColor(float value){
-        for (int i=0;i<scaleValue.length;i++){
-            if(value>=scaleValue[i][0] && value<=scaleValue[i][1]){
+    private int getValueColor(float value) {
+        for (int i = 0; i < scaleValue.length; i++) {
+            if (value >= scaleValue[i][0] && value <= scaleValue[i][1]) {
                 return arcColors[i];
             }
         }
         return 0;
     }
+
     //获取当前值在刻度弧上的坐标
-    private float[] getValuePosition(Path path,float value,boolean isOffset,float offScale){
-        float[] position=new float[2];
+    private float[] getValuePosition(Path path, float value, boolean isOffset, float offScale) {
+        float[] position = new float[2];
         PathMeasure measure = new PathMeasure(path, false);
-        PathMeasure measureLong=new PathMeasure(pointerLongPath,false);
-        float longPointerLength=measureLong.getLength();//长一点的刻度弧的长度
+        PathMeasure measureLong = new PathMeasure(pointerLongPath, false);
+        float longPointerLength = measureLong.getLength();//长一点的刻度弧的长度
         float pointLength = measure.getLength();//获取弧的总长度
-        float pointAnglelength=Math.abs(offScale*pointLength);//偏移角度的弧长 占短一点的指针弧的长度
-        float scale=(value-startscaleValue)/(endscaleValue-startscaleValue);//弧总长度 不一样
-        float distance=scale*pointLength;//点在短指针弧上的直接位置
-        float longDistance=pointAnglelength+distance+offScale*pointLength;//等于偏移角度的弧长加上
-        if(isOffset){
-            measureLong.getPosTan(longDistance,position,null);//使用长一点的弧获取位置 距离要加上一个偏移角度弧长
-        }else{
-            measure.getPosTan(scale*pointLength,position,null);
+        float pointAnglelength = Math.abs(offScale * pointLength);//偏移角度的弧长 占短一点的指针弧的长度
+        float scale = (value - startscaleValue) / (endscaleValue - startscaleValue);//弧总长度 不一样
+        float distance = scale * pointLength;//点在短指针弧上的直接位置
+        float longDistance = pointAnglelength + distance + offScale * pointLength;//等于偏移角度的弧长加上
+        if (isOffset) {
+            measureLong.getPosTan(longDistance, position, null);//使用长一点的弧获取位置 距离要加上一个偏移角度弧长
+        } else {
+            measure.getPosTan(scale * pointLength, position, null);
         }
         return position;
     }
 
-    public void setCurrentValue(float value){
-        currentValue= Float.parseFloat(new DecimalFormat("#.##").format(value));
+    public void setCurrentValue(float value) {
+        currentValue = Float.parseFloat(new DecimalFormat("#.##").format(value));
         invalidate();
     }
 }
